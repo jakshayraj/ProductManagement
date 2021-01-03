@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ProductManagement;
 using ProductManagement.Controllers;
+using ProductManagement.Models;
+
 
 namespace ProductManagement.Tests.Controllers
 {
@@ -17,19 +19,26 @@ namespace ProductManagement.Tests.Controllers
         private string searchString;
         private int? page;
         private int? id;
+        private int? pid = 29006;
 
         [TestMethod]
         public void Login()
         {
             // Arrange
             HomeController controller = new HomeController();
-
+            tblLogin login = new tblLogin()
+            {
+                emailid = "akshayraj@gmail.com",
+                password = "123456"
+            };
             // Act
-            ViewResult result = controller.Login() as ViewResult;
+            ViewResult result = controller.Login(login) as ViewResult;
 
             // Assert
+            Assert.AreEqual("akshayraj", result.ViewBag.Message);
             Assert.IsNotNull(result);
         }
+        [TestMethod]
         public void Index()
         {
             // Arrange
@@ -41,6 +50,7 @@ namespace ProductManagement.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+        [TestMethod]
         public void List()
         {
             // Arrange
@@ -52,27 +62,39 @@ namespace ProductManagement.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
+        [TestMethod]
         public void Create()
         {
             // Arrange
             ProductsController controller = new ProductsController();
+            Product product = new Product()
+            {
+                Id = 10,
+                Name = "Shoes",
+                Category = "Common",
+                Price = 1000,
+                Quantity = 1,
+                Short_desc = "Shoes",
+                Small_img = "image"
+            };
 
             // Act
-            ViewResult result = controller.Create() as ViewResult;
+            ViewResult result = controller.Create(product, null, null) as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
+        [TestMethod]
         public void Edit()
         {
             // Arrange
             ProductsController controller = new ProductsController();
-
+            
             // Act
-            ViewResult result = controller.Edit(id) as ViewResult;
+            ViewResult result = controller.Edit(null) as ViewResult;
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.IsNull(result);
         }
 
 

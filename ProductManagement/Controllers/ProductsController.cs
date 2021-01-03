@@ -20,7 +20,7 @@ namespace ProductManagement.Controllers
         private static readonly ILog Log = LogManager.GetLogger(typeof(ProductsController));
         // Entity for the database
         private ProdcutsEntities db = new ProdcutsEntities();
-        List<string> categories = new List<string> { "Commodity", "Common", "Consumer", "Digital", "Luxury" };
+        List<string> categories = new List<string> { "Mobile", "Shoes", "Electonics", "Cloths", "Accesories" };
         List<int> quantities = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         // GET: Products/Index
         public ActionResult Index()

@@ -37,7 +37,7 @@ namespace ProductManagement.Controllers
                         if (obj != null)
                         {
                             Log.Info("Login Successfully");
-                            
+                            ViewBag.Message = obj.username.ToString();
                             //Set the coockie for the authentication for the product details
                             FormsAuthentication.SetAuthCookie(obj.username.ToString(), false);
                             //Redirect to Index page
@@ -56,7 +56,7 @@ namespace ProductManagement.Controllers
             catch (Exception ex)
             {
                 //Set error for the model state
-                ModelState.AddModelError("", ex.ToString());
+                ModelState.AddModelError("", "Model Error");
                 Log.Error(ex.ToString());
             }
             //Return view with user object
