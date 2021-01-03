@@ -36,7 +36,8 @@ namespace ProductManagement.Controllers
                         var obj = db.tblLogins.Where(a => a.emailid.Equals(objUser.emailid) && a.password.Equals(objUser.password)).FirstOrDefault();
                         if (obj != null)
                         {
-                            Log.Info("Login Successffuly");
+                            Log.Info("Login Successfully");
+                            
                             //Set the coockie for the authentication for the product details
                             FormsAuthentication.SetAuthCookie(obj.username.ToString(), false);
                             //Redirect to Index page
@@ -67,6 +68,7 @@ namespace ProductManagement.Controllers
         {
             //Logout Logic
             FormsAuthentication.SignOut();
+            ViewBag.Message("Login Successfully");
             //Return to the Login Page
             return RedirectToAction("Login", "Home");
         }

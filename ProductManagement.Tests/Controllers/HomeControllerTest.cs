@@ -12,11 +12,28 @@ namespace ProductManagement.Tests.Controllers
     [TestClass]
     public class HomeControllerTest
     {
+        private string currentFilter;
+        private string sortOrder;
+        private string searchString;
+        private int? page;
+        private int? id;
+
         [TestMethod]
-        public void Index()
+        public void Login()
         {
             // Arrange
             HomeController controller = new HomeController();
+
+            // Act
+            ViewResult result = controller.Login() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+        public void Index()
+        {
+            // Arrange
+            ProductsController controller = new ProductsController();
 
             // Act
             ViewResult result = controller.Index() as ViewResult;
@@ -24,31 +41,40 @@ namespace ProductManagement.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-
-        [TestMethod]
-        public void About()
+        public void List()
         {
             // Arrange
-            HomeController controller = new HomeController();
+            ProductsController controller = new ProductsController();
 
             // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
+            ViewResult result = controller.List(sortOrder,currentFilter,searchString, page)as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);
         }
+        public void Create()
+        {
+            // Arrange
+            ProductsController controller = new ProductsController();
+
+            // Act
+            ViewResult result = controller.Create() as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+        public void Edit()
+        {
+            // Arrange
+            ProductsController controller = new ProductsController();
+
+            // Act
+            ViewResult result = controller.Edit(id) as ViewResult;
+
+            // Assert
+            Assert.IsNotNull(result);
+        }
+
+
     }
 }
